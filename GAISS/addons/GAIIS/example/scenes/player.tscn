@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=3 uid="uid://fpmj5mhvdctt"]
+
+[ext_resource type="Script" uid="uid://jsy215cey5ub" path="res://addons/GAIIS/example/example_scripts/player.gd" id="1_mnu2i"]
+[ext_resource type="Script" uid="uid://cgul6piejhd0d" path="res://addons/GAIIS/scripts/entity_attribute_map.gd" id="2_lhukn"]
+[ext_resource type="Resource" uid="uid://b8jpq6qvardpx" path="res://addons/GAIIS/example/attribute_maps/attmap_player.tres" id="3_3rd4u"]
+[ext_resource type="Script" uid="uid://i0pgrbayqluh" path="res://addons/GAIIS/inventory/inventory.gd" id="8_ktq71"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s4bya"]
+height = 2.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_s4bya"]
+height = 2.5
+radial_segments = 12
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnu2i"]
+albedo_color = Color(0, 1, 1, 1)
+
+[node name="player" type="CharacterBody3D" node_paths=PackedStringArray("camera")]
+collision_layer = 2
+script = ExtResource("1_mnu2i")
+camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_s4bya")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 524288
+mesh = SubResource("CapsuleMesh_s4bya")
+surface_material_override/0 = SubResource("StandardMaterial3D_mnu2i")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+cull_mask = 524287
+
+[node name="EntityAttributeMap" type="Node" parent="."]
+script = ExtResource("2_lhukn")
+map_config = ExtResource("3_3rd4u")
+metadata/_custom_type_script = "uid://cgul6piejhd0d"
+
+[node name="status_effects" type="Node" parent="."]
+
+[node name="InventoryObject" type="Node" parent="."]
+script = ExtResource("8_ktq71")
+metadata/_custom_type_script = "uid://i0pgrbayqluh"

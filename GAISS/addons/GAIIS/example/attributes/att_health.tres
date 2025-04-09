@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EntityAttribute" load_steps=2 format=3 uid="uid://cf1grp615geti"]
+
+[ext_resource type="Script" uid="uid://dla0scnvmfyvv" path="res://addons/GAIIS/resources/entity_attribute.gd" id="1_1tb47"]
+
+[resource]
+script = ExtResource("1_1tb47")
+attribute_name = &"health"
+has_max = true
+metadata/_custom_type_script = "uid://dla0scnvmfyvv"

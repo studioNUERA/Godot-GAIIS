@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=5 format=3 uid="uid://bxv3d0pljdgkw"]
+
+[ext_resource type="Script" uid="uid://cylnpsws083la" path="res://addons/GAIIS/resources/attribute_modifier.gd" id="1_qx452"]
+[ext_resource type="Resource" uid="uid://can0kbdmrm4gt" path="res://addons/GAIIS/example/attributes/att_movespeed.tres" id="2_d2l3w"]
+[ext_resource type="Script" uid="uid://be6xcbwa46tkm" path="res://addons/GAIIS/items/item_resource.gd" id="2_ywv7x"]
+
+[sub_resource type="Resource" id="Resource_87jmb"]
+script = ExtResource("1_qx452")
+modifier_type = 1
+attribute_to_mod = ExtResource("2_d2l3w")
+value_to_alter = 0
+modifier_amount = 15.0
+metadata/_custom_type_script = "uid://cylnpsws083la"
+
+[resource]
+script = ExtResource("2_ywv7x")
+item_name = &"bat_wing"
+item_display_name = "Bat Wing"
+item_description = "Increase movement speed by 15% per stack"
+item_rarity = 0
+attribute_modifiers = Array[ExtResource("1_qx452")]([SubResource("Resource_87jmb")])
+item_can_stack = false
+item_max_stack = 1
+effect_scale_type = 0
+metadata/_custom_type_script = "uid://be6xcbwa46tkm"

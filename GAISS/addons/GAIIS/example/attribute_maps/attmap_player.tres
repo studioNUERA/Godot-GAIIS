@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AttributeMapConfiguration" load_steps=7 format=3 uid="uid://b8jpq6qvardpx"]
+
+[ext_resource type="Script" uid="uid://c3y6wkdvc34ji" path="res://addons/GAIIS/resources/entity_attribute_data.gd" id="1_5othg"]
+[ext_resource type="Resource" uid="uid://can0kbdmrm4gt" path="res://addons/GAIIS/example/attributes/att_movespeed.tres" id="2_qdgqe"]
+[ext_resource type="Script" uid="uid://de764ww6tneca" path="res://addons/GAIIS/resources/attribute_map_configuration.gd" id="2_utfq0"]
+[ext_resource type="Resource" uid="uid://cf1grp615geti" path="res://addons/GAIIS/example/attributes/att_health.tres" id="3_nc1hh"]
+
+[sub_resource type="Resource" id="Resource_nc1hh"]
+script = ExtResource("1_5othg")
+attribute = ExtResource("2_qdgqe")
+min_value = 0.0
+max_value = 0.0
+current_value = 7.0
+metadata/_custom_type_script = "uid://c3y6wkdvc34ji"
+
+[sub_resource type="Resource" id="Resource_utfq0"]
+script = ExtResource("1_5othg")
+attribute = ExtResource("3_nc1hh")
+min_value = 0.0
+max_value = 100.0
+current_value = 100.0
+metadata/_custom_type_script = "uid://c3y6wkdvc34ji"
+
+[resource]
+script = ExtResource("2_utfq0")
+attributes = Array[ExtResource("1_5othg")]([SubResource("Resource_nc1hh"), SubResource("Resource_utfq0")])
+metadata/_custom_type_script = "uid://de764ww6tneca"

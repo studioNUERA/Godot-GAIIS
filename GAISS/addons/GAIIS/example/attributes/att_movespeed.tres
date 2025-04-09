@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="EntityAttribute" load_steps=2 format=3 uid="uid://can0kbdmrm4gt"]
+
+[ext_resource type="Script" uid="uid://dla0scnvmfyvv" path="res://addons/GAIIS/resources/entity_attribute.gd" id="1_lx567"]
+
+[resource]
+script = ExtResource("1_lx567")
+attribute_name = &"move_speed"
+metadata/_custom_type_script = "uid://dla0scnvmfyvv"

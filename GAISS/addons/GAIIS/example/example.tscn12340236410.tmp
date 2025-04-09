@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0xg2pdbbcwy7"]
+
+[ext_resource type="Script" uid="uid://wepewgq71vkx" path="res://GAIIS/example/example_controller.gd" id="1_v6qmp"]
+[ext_resource type="PackedScene" uid="uid://bhlvqpvb5gqtr" path="res://GAIIS/example/list_dialog.tscn" id="2_jbtv4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6qmp"]
+bg_color = Color(0, 0, 0, 0.133333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbtv4"]
+bg_color = Color(0, 0, 0, 0.133333)
+
+[node name="example" type="Node2D" node_paths=PackedStringArray("ui_canvas_layer", "ui_inventory_items")]
+script = ExtResource("1_v6qmp")
+ui_canvas_layer = NodePath("CanvasLayer")
+ui_inventory_items = NodePath("CanvasLayer/Control/inventory/inventory_items")
+sc_list_dialog = ExtResource("2_jbtv4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inventory" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -328.0
+offset_right = 264.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6qmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/inventory"]
+layout_mode = 1
+offset_top = -48.0
+offset_right = 256.0
+offset_bottom = -8.0
+theme_override_font_sizes/normal_font_size = 28
+text = "Items"
+horizontal_alignment = 1
+
+[node name="inventory_items" type="GridContainer" parent="CanvasLayer/Control/inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+
+[node name="character" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -328.0
+offset_right = 256.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6qmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/character"]
+layout_mode = 1
+offset_top = -48.0
+offset_right = 512.0
+offset_bottom = -8.0
+theme_override_font_sizes/normal_font_size = 28
+text = "Character"
+horizontal_alignment = 1
+
+[node name="controls" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 456.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jbtv4")
+
+[node name="add_item" type="Button" parent="CanvasLayer/Control/controls"]
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 126.0
+offset_bottom = 16.0
+grow_vertical = 2
+text = "Add Item"
+
+[connection signal="pressed" from="CanvasLayer/Control/controls/add_item" to="." method="_on_add_item_pressed"]

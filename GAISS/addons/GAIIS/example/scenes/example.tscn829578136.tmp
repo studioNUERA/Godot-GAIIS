@@ -1,0 +1,237 @@
+[gd_scene load_steps=12 format=3 uid="uid://d0xg2pdbbcwy7"]
+
+[ext_resource type="Script" uid="uid://wepewgq71vkx" path="res://addons/GAIIS/example/example_scripts/example_controller.gd" id="1_v6qmp"]
+[ext_resource type="PackedScene" uid="uid://bhlvqpvb5gqtr" path="res://addons/GAIIS/example/scenes/list_dialog.tscn" id="2_jbtv4"]
+[ext_resource type="PackedScene" uid="uid://cjyxkid10wnyx" path="res://addons/GAIIS/example/scenes/inventory_item.tscn" id="3_ec8qe"]
+[ext_resource type="Script" uid="uid://i0pgrbayqluh" path="res://addons/GAIIS/inventory/inventory.gd" id="3_fv7o3"]
+[ext_resource type="PackedScene" uid="uid://cq2an2asdrqcf" path="res://addons/GAIIS/example/scenes/status_effect_dialog.tscn" id="4_43k3b"]
+[ext_resource type="Script" uid="uid://cgul6piejhd0d" path="res://addons/GAIIS/scripts/entity_attribute_map.gd" id="4_g40h6"]
+[ext_resource type="PackedScene" uid="uid://c7gom2tpndi7y" path="res://addons/GAIIS/example/scenes/status_effect_item.tscn" id="5_r1c1e"]
+[ext_resource type="Resource" uid="uid://ddw03oioskmoh" path="res://addons/GAIIS/example/attributes/configs/mapc_example.tres" id="8_nvj6f"]
+[ext_resource type="Script" uid="uid://do8ahrd02of6f" path="res://addons/GAIIS/scripts/entity_stat_tracker.gd" id="14_tgxvs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v6qmp"]
+bg_color = Color(0, 0, 0, 0.133333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jbtv4"]
+bg_color = Color(0, 0, 0, 0.133333)
+
+[node name="example" type="Node2D" node_paths=PackedStringArray("ui_canvas_layer", "ui_inventory_items", "ui_stat_names", "ui_stat_values", "ui_status_effect_container", "inventory_node", "attribute_map")]
+script = ExtResource("1_v6qmp")
+ui_canvas_layer = NodePath("CanvasLayer")
+ui_inventory_items = NodePath("CanvasLayer/Control/inventory/inventory_items")
+ui_stat_names = NodePath("CanvasLayer/Control/character/stat_names")
+ui_stat_values = NodePath("CanvasLayer/Control/character/stat_values")
+ui_status_effect_container = NodePath("CanvasLayer/Control/status_effects/MarginContainer/VBoxContainer")
+sc_list_dialog = ExtResource("2_jbtv4")
+sc_inv_item_ui = ExtResource("3_ec8qe")
+sc_se_dialog = ExtResource("4_43k3b")
+sc_se_item = ExtResource("5_r1c1e")
+inventory_node = NodePath("inventory")
+attribute_map = NodePath("attribute_map")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="inventory" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -328.0
+offset_right = 264.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6qmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/inventory"]
+layout_mode = 1
+offset_top = -48.0
+offset_right = 256.0
+offset_bottom = -8.0
+theme_override_font_sizes/normal_font_size = 28
+text = "Items"
+horizontal_alignment = 1
+
+[node name="inventory_items" type="GridContainer" parent="CanvasLayer/Control/inventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="status_effects" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -296.0
+offset_top = -328.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6qmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/status_effects"]
+layout_mode = 1
+offset_top = -48.0
+offset_right = 288.0
+offset_bottom = -8.0
+theme_override_font_sizes/normal_font_size = 28
+text = "Status Effects"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/status_effects"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/status_effects/MarginContainer"]
+layout_mode = 2
+
+[node name="character" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -328.0
+offset_right = 256.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v6qmp")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/character"]
+layout_mode = 1
+offset_top = -48.0
+offset_right = 512.0
+offset_bottom = -8.0
+theme_override_font_sizes/normal_font_size = 28
+text = "Character"
+horizontal_alignment = 1
+
+[node name="stat_names" type="VBoxContainer" parent="CanvasLayer/Control/character"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 320.0
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/character/stat_names"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "Test Item 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control/character/stat_names"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "Test Item 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="stat_values" type="VBoxContainer" parent="CanvasLayer/Control/character"]
+layout_mode = 0
+offset_left = 128.0
+offset_right = 256.0
+offset_bottom = 320.0
+theme_override_constants/separation = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/character/stat_values"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "9.22"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/Control/character/stat_values"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+bbcode_enabled = true
+text = "12.78"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="controls" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 456.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jbtv4")
+
+[node name="add_item" type="Button" parent="CanvasLayer/Control/controls"]
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -16.0
+offset_right = 126.0
+offset_bottom = 16.0
+grow_vertical = 2
+text = "Add Item"
+
+[node name="status_effects" type="Button" parent="CanvasLayer/Control/controls"]
+custom_minimum_size = Vector2(110, 32)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 144.0
+offset_top = -16.0
+offset_right = 264.0
+offset_bottom = 16.0
+grow_vertical = 2
+text = "Status Effects"
+
+[node name="inventory" type="Node" parent="." node_paths=PackedStringArray("r_attribute_map")]
+script = ExtResource("3_fv7o3")
+r_attribute_map = NodePath("../attribute_map")
+
+[node name="attribute_map" type="Node" parent="." node_paths=PackedStringArray("se_processor_holder")]
+script = ExtResource("4_g40h6")
+entity_attributes = ExtResource("8_nvj6f")
+se_processor_holder = NodePath("../status_effects")
+
+[node name="status_effects" type="Node" parent="."]
+
+[node name="EntityStatTracker" type="Node" parent="."]
+script = ExtResource("14_tgxvs")
+metadata/_custom_type_script = "uid://do8ahrd02of6f"
+
+[connection signal="pressed" from="CanvasLayer/Control/controls/add_item" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/controls/status_effects" to="." method="_on_status_effects_pressed"]
